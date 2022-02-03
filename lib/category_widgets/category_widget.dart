@@ -53,10 +53,7 @@ class _CategoryFieldWidget extends StatelessWidget {
               height: 1,
             ),
         itemBuilder: (BuildContext context, int index) {
-          void delete_category() {
-            _model.deleteCategory(index);
-          }
-
+          
           final category =
               CategoryWidgetProvider.read(context)?.model.categories[index];
 
@@ -65,7 +62,7 @@ class _CategoryFieldWidget extends StatelessWidget {
                 motion: BehindMotion(),
                 children: [
                   SlidableAction(
-                    onPressed: (context) => delete_category(),
+                    onPressed: (context) => _model.deleteCategory(index),
                     backgroundColor: Colors.red,
                     foregroundColor: Colors.white,
                     icon: Icons.delete,
@@ -76,6 +73,7 @@ class _CategoryFieldWidget extends StatelessWidget {
               child: ListTile(
                 title: Text(category!.name),
                 trailing: Icon(Icons.arrow_right),
+                onTap: () => _model.showTasks(context, index),
               ));
         });
   }

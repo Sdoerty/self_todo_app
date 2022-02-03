@@ -6,6 +6,9 @@ class Category{
 
   @HiveField(0)
   String name;
+  
+  @HiveField(1)
+  HiveList? tasks;
 
   Category ({required this.name});
 }

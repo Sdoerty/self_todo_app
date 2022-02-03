@@ -13,7 +13,17 @@ class CategoryWidgetModel extends ChangeNotifier {
   }
 
   void showForm(BuildContext context) {
-    Navigator.pushNamed(context, '/create_category');
+    Navigator.pushNamed(context, '/category/create_category');
+  }
+
+  void showTasks(BuildContext context, int categoryIndex) async{
+    if (!Hive.isAdapterRegistered(1)) {
+      Hive.registerAdapter(CategoryAdapter());
+    }
+    final box = await Hive.openBox<Category>('category');
+    final categoryKey = box.keyAt(categoryIndex) as int;
+
+    Navigator.pushNamed(context, '/category/tasks', arguments: categoryKey);
   }
 
   void deleteCategory(int categoryIndex) async{
